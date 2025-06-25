@@ -1,11 +1,7 @@
 import {
-
   Facebook,
   Github,
-  Instagram,
   Linkedin,
-  Twitter,
-  Youtube,
   Download,
   ArrowRight,
 } from "lucide-react";
@@ -67,20 +63,11 @@ const Hero = () => {
 
         {/* Social media links with glass morphism */}
         <div className="glass w-fit px-6 py-4 rounded-2xl flex gap-6 items-center mb-8 backdrop-blur-md">
-          <Link to={"https://www.youtube.com/@CodeWithZeeshu"} target="_blank" className="hover:scale-110 transition-transform duration-300">
-            <Youtube className="text-red-500 w-8 h-8 hover:text-red-400"/>
-          </Link>
-          <Link to={user.instagramURL} target="_blank" className="hover:scale-110 transition-transform duration-300">
-            <Instagram className="text-pink-500 w-8 h-8 hover:text-pink-400" />
-          </Link>
           <Link to={user.facebookURL} target="_blank" className="hover:scale-110 transition-transform duration-300">
             <Facebook className="text-blue-600 w-8 h-8 hover:text-blue-500" />
           </Link>
           <Link to={user.linkedInURL} target="_blank" className="hover:scale-110 transition-transform duration-300">
             <Linkedin className="text-sky-500 w-8 h-8 hover:text-sky-400" />
-          </Link>
-          <Link to={user.twitterURL} target="_blank" className="hover:scale-110 transition-transform duration-300">
-            <Twitter className="text-blue-400 w-8 h-8 hover:text-blue-300" />
           </Link>
         </div>
 

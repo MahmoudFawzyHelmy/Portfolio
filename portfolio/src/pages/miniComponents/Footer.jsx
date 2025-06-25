@@ -1,5 +1,5 @@
 import React from "react";
-import { Heart, ArrowUp, Mail, Github, Linkedin, Twitter, Instagram } from "lucide-react";
+import { Heart, ArrowUp, Mail, Github, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -35,12 +35,6 @@ const Footer = () => {
                 </Link>
                 <Link to="https://linkedin.com" target="_blank" className="p-2 bg-gray-800 rounded-full hover:bg-purple-600 transition-colors">
                   <Linkedin className="w-5 h-5 text-white" />
-                </Link>
-                <Link to="https://twitter.com" target="_blank" className="p-2 bg-gray-800 rounded-full hover:bg-purple-600 transition-colors">
-                  <Twitter className="w-5 h-5 text-white" />
-                </Link>
-                <Link to="https://instagram.com" target="_blank" className="p-2 bg-gray-800 rounded-full hover:bg-purple-600 transition-colors">
-                  <Instagram className="w-5 h-5 text-white" />
                 </Link>
               </div>
             </div>

@@ -21,8 +21,8 @@ const Timeline = () => {
           {
             _id: "1",
             title: "Software Engineering Degree",
-            description: "Graduated with honors in Software Engineering from SMIU",
-            timeline: { from: "2020", to: "2024" },
+            description: "Graduated with honors in Software Engineering from cairo",
+            timeline: { from: "2015", to: "2019" },
             type: "education"
           },
           {
