@@ -1,20 +1,43 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ResetPassword from "./pages/ResetPassword"
-import ManageSkills from "./pages/ManageSkills"
-import ManageTimeline from "./pages/ManageTimeline"
-import ViewProject from "./pages/ViewProject"
-import UpdateProject from "./pages/UpdateProject"
-import HomePage from "./pages/HomePage"
-import Login from "./pages/Login"
-import ForgotPassword from "./pages/ForgotPassword"
-import ManageProjects from "./pages/ManageProjects"
-export default function App() {
-  return <Router>
+import Login from "./pages/Login";
+import HomePage from "./pages/HomePage";
+import ManageSkills from "./pages/ManageSkills";
+import ManageProjects from "./pages/ManageProjects";
+import UpdateProject from "./pages/UpdateProject";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getUser } from "./store/slices/userSlice";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import { getAllSkills } from "./store/slices/skillSlice";
+import { getAllSoftwareApplications } from "./store/slices/softwareApplicationSlice";
+import { getAllTimeline } from "./store/slices/timelineSlice";
+import { getAllMessages } from "./store/slices/messageSlice";
+import ManageTimeline from "./pages/ManageTimeline";
+import { getAllProjects } from "./store/slices/projectSlice";
+import ViewProject from "./pages/ViewProject";
+import Register from "./pages/Register";
+
+function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser());
+    dispatch(getAllSkills());
+    dispatch(getAllSoftwareApplications());
+    dispatch(getAllTimeline());
+    dispatch(getAllMessages());
+    dispatch(getAllProjects());
+  }, []);
+  return (
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/manage/skills" element={<ManageSkills />} />
@@ -24,5 +47,8 @@ export default function App() {
         <Route path="/update/project/:id" element={<UpdateProject />} />
       </Routes>
       <ToastContainer position="bottom-right" theme="dark" />
-  </Router>
+    </BrowserRouter>
+  );
 }
+
+export default App;

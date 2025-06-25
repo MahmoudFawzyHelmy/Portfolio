@@ -11,9 +11,7 @@ import SpecialLoadingButton from "./sub-components/SpecialLoadingButton";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loading, isAuthenticated, error } = useSelector(
-    (state) => state.user
-  );
+  const { loading, isAuthenticated, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
 
@@ -32,58 +30,63 @@ const Login = () => {
   }, [dispatch, isAuthenticated, error, loading]);
 
   return (
-    <div className="w-full lg:grid lg:min-h-[100vh] lg:grid-cols-2 xl:min-h-[100vh]">
-      <div className=" min-h-[100vh] flex items-center justify-center py-12">
-        <div className="mx-auto grid w-[350px] gap-6">
-          <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-balance text-muted-foreground">
-              Enter your email below to login to your account
-            </p>
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 relative overflow-hidden">
+      {/* خلفية زجاجية متدرجة */}
+      <div className="absolute inset-0 bg-[url('/login.png')] bg-cover bg-center opacity-10 z-0" />
+      <div className="relative z-10 flex flex-col md:flex-row items-center justify-center w-full max-w-4xl mx-auto p-4">
+        {/* الكارد */}
+        <div className="backdrop-blur-md bg-white/70 dark:bg-gray-900/70 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-auto">
+          <div className="mb-8 text-center">
+            <h1 className="text-4xl font-extrabold text-gray-800 dark:text-white mb-2">تسجيل الدخول</h1>
+            <p className="text-gray-500 dark:text-gray-300">ادخل بريدك الإلكتروني وكلمة المرور للمتابعة</p>
           </div>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+          <div className="space-y-6">
+            <div>
+              <Label htmlFor="email" className="block mb-1 text-gray-700 dark:text-gray-200">البريد الإلكتروني</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
+                placeholder="example@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="focus:ring-2 focus:ring-blue-400"
               />
             </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label>Password</Label>
-                <Link
-                  to="/password/forgot"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
-                </Link>
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <Label htmlFor="password" className="text-gray-700 dark:text-gray-200">كلمة المرور</Label>
+                <Link to="/password/forgot" className="text-sm text-blue-600 hover:underline">نسيت كلمة المرور؟</Link>
               </div>
               <Input
+                id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
+                className="focus:ring-2 focus:ring-pink-400"
               />
             </div>
             {loading ? (
-              <SpecialLoadingButton content={"Loggin In"} />
+              <SpecialLoadingButton content={"جاري تسجيل الدخول..."} />
             ) : (
               <Button
-                onClick={() => handleLogin(email, password)}
-                className="w-full"
+                onClick={handleLogin}
+                className="w-full bg-gradient-to-r from-blue-500 to-pink-500 text-white font-bold py-2 rounded-lg shadow-md hover:from-pink-500 hover:to-blue-500 transition-all duration-300"
               >
-                Login
+                دخول
               </Button>
             )}
           </div>
+          <p className="text-center mt-6 text-gray-600 dark:text-gray-300">
+            ليس لديك حساب؟ {" "}
+            <Link to="/register" className="text-blue-600 underline hover:text-pink-500 transition-all">إنشاء حساب جديد</Link>
+          </p>
         </div>
-      </div>
-      <div className="flex justify-center items-center bg-muted">
-        <img src="/login.png" alt="login" />
+        {/* صورة جانبية للشاشات الكبيرة */}
+        <div className="hidden md:block md:w-1/2 pl-8">
+          <img src="/login.png" alt="login" className="rounded-2xl shadow-xl max-h-[400px] object-cover" />
+        </div>
       </div>
     </div>
   );
