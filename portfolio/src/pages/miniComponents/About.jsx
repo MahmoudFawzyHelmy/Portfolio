@@ -114,9 +114,10 @@ const About = () => {
               "MongoDB",
               "JavaScript",
               "TypeScript",
-              "Python",
-              "AWS",
-              "Docker",
+              "HTML",
+              "CSS",
+             
+           
             ].map((skill, index) => (
               <span
                 key={skill}

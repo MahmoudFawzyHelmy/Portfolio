@@ -26,14 +26,13 @@ const Skills = () => {
 
   // Default skills if API fails
   const defaultSkills = [
+      { title: "HTML", category: "Language" },
+    { title: "CSS", category: "Language" },
     { title: "React", category: "Frontend" },
     { title: "Node.js", category: "Backend" },
     { title: "MongoDB", category: "Database" },
     { title: "JavaScript", category: "Language" },
     { title: "TypeScript", category: "Language" },
-    { title: "Python", category: "Language" },
-    { title: "AWS", category: "Cloud" },
-    { title: "Docker", category: "DevOps" },
     { title: "Git", category: "Tools" },
     { title: "Figma", category: "Design" }
   ];
@@ -122,7 +121,7 @@ const Skills = () => {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-2">Frontend</h3>
-                  <p className="text-gray-400">React, Vue, Angular, Next.js</p>
+                  <p className="text-gray-400">React, Angular, Next.js</p>
                 </div>
               </div>
               
@@ -132,7 +131,7 @@ const Skills = () => {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-2">Backend</h3>
-                  <p className="text-gray-400">Node.js, Python, Java, .NET</p>
+                  <p className="text-gray-400">Node.js, MongoDb</p>
                 </div>
               </div>
               
@@ -142,7 +141,7 @@ const Skills = () => {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold text-white mb-2">Tools</h3>
-                  <p className="text-gray-400">Git, Docker, AWS, CI/CD</p>
+                  <p className="text-gray-400">Git, Docker,</p>
                 </div>
               </div>
             </div>
