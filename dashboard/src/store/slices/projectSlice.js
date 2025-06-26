@@ -79,7 +79,6 @@ const projectSlice = createSlice({
     },
     clearAllErrors(state, action) {
       state.error = null;
-      state = state.projects;
     },
   },
 });
@@ -88,7 +87,7 @@ export const getAllProjects = () => async (dispatch) => {
   dispatch(projectSlice.actions.getAllProjectsRequest());
   try {
     const response = await axios.get(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/project/getall",
+      "http://localhost:4000/api/v1/project/getall",
       { withCredentials: true }
     );
     dispatch(
@@ -96,8 +95,9 @@ export const getAllProjects = () => async (dispatch) => {
     );
     dispatch(projectSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to load projects";
     dispatch(
-      projectSlice.actions.getAllProjectsFailed(error.response.data.message)
+      projectSlice.actions.getAllProjectsFailed(errorMessage)
     );
   }
 };
@@ -106,7 +106,7 @@ export const addNewProject = (data) => async (dispatch) => {
   dispatch(projectSlice.actions.addNewProjectRequest());
   try {
     const response = await axios.post(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/project/add",
+      "http://localhost:4000/api/v1/project/add",
       data,
       {
         withCredentials: true,
@@ -116,8 +116,9 @@ export const addNewProject = (data) => async (dispatch) => {
     dispatch(projectSlice.actions.addNewProjectSuccess(response.data.message));
     dispatch(projectSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to add project";
     dispatch(
-      projectSlice.actions.addNewProjectFailed(error.response.data.message)
+      projectSlice.actions.addNewProjectFailed(errorMessage)
     );
   }
 };
@@ -125,7 +126,7 @@ export const deleteProject = (id) => async (dispatch) => {
   dispatch(projectSlice.actions.deleteProjectRequest());
   try {
     const response = await axios.delete(
-      `https://mern-stack-portfolio-backend-code.onrender.com/api/v1/project/delete/${id}`,
+      `http://localhost:4000/api/v1/project/delete/${id}`,
       {
         withCredentials: true,
       }
@@ -133,8 +134,9 @@ export const deleteProject = (id) => async (dispatch) => {
     dispatch(projectSlice.actions.deleteProjectSuccess(response.data.message));
     dispatch(projectSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to delete project";
     dispatch(
-      projectSlice.actions.deleteProjectFailed(error.response.data.message)
+      projectSlice.actions.deleteProjectFailed(errorMessage)
     );
   }
 };
@@ -142,7 +144,7 @@ export const updateProject = (id, newData) => async (dispatch) => {
   dispatch(projectSlice.actions.updateProjectRequest());
   try {
     const response = await axios.put(
-      `https://mern-stack-portfolio-backend-code.onrender.com/api/v1/project/update/${id}`,
+      `http://localhost:4000/api/v1/project/update/${id}`,
       newData,
       {
         withCredentials: true,
@@ -153,8 +155,9 @@ export const updateProject = (id, newData) => async (dispatch) => {
     dispatch(projectSlice.actions.clearAllErrors());
   } catch (error) {
     console.log(error);
+    const errorMessage = error.response?.data?.message || error.message || "Failed to update project";
     dispatch(
-      projectSlice.actions.updateProjectFailed(error.response.data.message)
+      projectSlice.actions.updateProjectFailed(errorMessage)
     );
   }
 };

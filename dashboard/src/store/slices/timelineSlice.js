@@ -63,7 +63,6 @@ const timelineSlice = createSlice({
     },
     clearAllErrors(state, action) {
       state.error = null;
-      state = state.timeline;
     },
   },
 });
@@ -72,7 +71,7 @@ export const getAllTimeline = () => async (dispatch) => {
   dispatch(timelineSlice.actions.getAllTimelineRequest());
   try {
     const response = await axios.get(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/timeline/getall",
+      "http://localhost:4000/api/v1/timeline/getall",
       { withCredentials: true }
     );
     dispatch(
@@ -80,8 +79,9 @@ export const getAllTimeline = () => async (dispatch) => {
     );
     dispatch(timelineSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to load timeline";
     dispatch(
-      timelineSlice.actions.getAllTimelineFailed(error.response.data.message)
+      timelineSlice.actions.getAllTimelineFailed(errorMessage)
     );
   }
 };
@@ -90,7 +90,7 @@ export const addNewTimeline = (data) => async (dispatch) => {
   dispatch(timelineSlice.actions.addNewTimelineRequest());
   try {
     const response = await axios.post(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/timeline/add",
+      "http://localhost:4000/api/v1/timeline/add",
       data,
       {
         withCredentials: true,
@@ -102,8 +102,9 @@ export const addNewTimeline = (data) => async (dispatch) => {
     );
     dispatch(timelineSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to add timeline";
     dispatch(
-      timelineSlice.actions.addNewTimelineFailed(error.response.data.message)
+      timelineSlice.actions.addNewTimelineFailed(errorMessage)
     );
   }
 };
@@ -111,7 +112,7 @@ export const deleteTimeline = (id) => async (dispatch) => {
   dispatch(timelineSlice.actions.deleteTimelineRequest());
   try {
     const response = await axios.delete(
-      `https://mern-stack-portfolio-backend-code.onrender.com/api/v1/timeline/delete/${id}`,
+      `http://localhost:4000/api/v1/timeline/delete/${id}`,
       {
         withCredentials: true,
       }
@@ -121,8 +122,9 @@ export const deleteTimeline = (id) => async (dispatch) => {
     );
     dispatch(timelineSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to delete timeline";
     dispatch(
-      timelineSlice.actions.deleteTimelineFailed(error.response.data.message)
+      timelineSlice.actions.deleteTimelineFailed(errorMessage)
     );
   }
 };

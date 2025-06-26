@@ -27,7 +27,7 @@ const Login = () => {
     if (isAuthenticated) {
       navigateTo("/");
     }
-  }, [dispatch, isAuthenticated, error, loading]);
+  }, [dispatch, isAuthenticated, error, navigateTo]);
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 relative overflow-hidden">
@@ -78,10 +78,6 @@ const Login = () => {
               </Button>
             )}
           </div>
-          <p className="text-center mt-6 text-gray-600 dark:text-gray-300">
-            ليس لديك حساب؟ {" "}
-            <Link to="/register" className="text-blue-600 underline hover:text-pink-500 transition-all">إنشاء حساب جديد</Link>
-          </p>
         </div>
         {/* صورة جانبية للشاشات الكبيرة */}
         <div className="hidden md:block md:w-1/2 pl-8">

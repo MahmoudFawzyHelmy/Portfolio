@@ -87,14 +87,15 @@ export const getAllSkills = () => async (dispatch) => {
   dispatch(skillSlice.actions.getAllSkillsRequest());
   try {
     const response = await axios.get(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/skill/getall",
+      "http://localhost:4000/api/v1/skill/getall",
       { withCredentials: true }
     );
     dispatch(skillSlice.actions.getAllSkillsSuccess(response.data.skills));
     dispatch(skillSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to load skills";
     dispatch(
-      skillSlice.actions.getAllSkillsFailed(error.response.data.message)
+      skillSlice.actions.getAllSkillsFailed(errorMessage)
     );
   }
 };
@@ -103,7 +104,7 @@ export const addNewSkill = (data) => async (dispatch) => {
   dispatch(skillSlice.actions.addNewSkillRequest());
   try {
     const response = await axios.post(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/skill/add",
+      "http://localhost:4000/api/v1/skill/add",
       data,
       {
         withCredentials: true,
@@ -115,7 +116,8 @@ export const addNewSkill = (data) => async (dispatch) => {
     dispatch(skillSlice.actions.addNewSkillSuccess(response.data.message));
     dispatch(skillSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(skillSlice.actions.addNewSkillFailed(error.response.data.message));
+    const errorMessage = error.response?.data?.message || error.message || "Failed to add skill";
+    dispatch(skillSlice.actions.addNewSkillFailed(errorMessage));
   }
 };
 
@@ -123,7 +125,7 @@ export const updateSkill = (id, proficiency) => async (dispatch) => {
   dispatch(skillSlice.actions.updateSkillRequest());
   try {
     const response = await axios.put(
-      `https://mern-stack-portfolio-backend-code.onrender.com/api/v1/skill/update/${id}`,
+      `http://localhost:4000/api/v1/skill/update/${id}`,
       { proficiency },
       {
         withCredentials: true,
@@ -133,7 +135,8 @@ export const updateSkill = (id, proficiency) => async (dispatch) => {
     dispatch(skillSlice.actions.updateSkillSuccess(response.data.message));
     dispatch(skillSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(skillSlice.actions.updateSkillFailed(error.response.data.message));
+    const errorMessage = error.response?.data?.message || error.message || "Failed to update skill";
+    dispatch(skillSlice.actions.updateSkillFailed(errorMessage));
   }
 };
 
@@ -141,7 +144,7 @@ export const deleteSkill = (id) => async (dispatch) => {
   dispatch(skillSlice.actions.deleteSkillRequest());
   try {
     const response = await axios.delete(
-      `https://mern-stack-portfolio-backend-code.onrender.com/api/v1/skill/delete/${id}`,
+      `http://localhost:4000/api/v1/skill/delete/${id}`,
       {
         withCredentials: true,
       }
@@ -149,7 +152,8 @@ export const deleteSkill = (id) => async (dispatch) => {
     dispatch(skillSlice.actions.deleteSkillSuccess(response.data.message));
     dispatch(skillSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(skillSlice.actions.deleteSkillFailed(error.response.data.message));
+    const errorMessage = error.response?.data?.message || error.message || "Failed to delete skill";
+    dispatch(skillSlice.actions.deleteSkillFailed(errorMessage));
   }
 };
 

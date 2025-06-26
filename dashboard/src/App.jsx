@@ -19,7 +19,6 @@ import { getAllMessages } from "./store/slices/messageSlice";
 import ManageTimeline from "./pages/ManageTimeline";
 import { getAllProjects } from "./store/slices/projectSlice";
 import ViewProject from "./pages/ViewProject";
-import Register from "./pages/Register";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +36,6 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/password/forgot" element={<ForgotPassword />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/manage/skills" element={<ManageSkills />} />

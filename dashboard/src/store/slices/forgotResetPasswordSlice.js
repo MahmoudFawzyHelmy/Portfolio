@@ -47,53 +47,42 @@ const forgotResetPassSlice = createSlice({
 });
 
 export const forgotPassword = (email) => async (dispatch) => {
+  dispatch(forgotResetPassSlice.actions.forgotPasswordRequest());
   try {
-    dispatch(forgotResetPassSlice.actions.forgotPasswordRequest());
-    console.log(email);
-    const response = await axios.post(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/user/password/forgot",
+    const { data } = await axios.post(
+      "http://localhost:4000/api/v1/user/password/forgot",
       { email },
-      { withCredentials: true, headers: { "Content-Type": "application/json" } }
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+      }
     );
-    console.log(response);
-    dispatch(
-      forgotResetPassSlice.actions.forgotPasswordSuccess(response.data.message)
-    );
+    dispatch(forgotResetPassSlice.actions.forgotPasswordSuccess(data.message));
+    dispatch(forgotResetPassSlice.actions.clearAllErrors());
   } catch (error) {
-    console.log(error);
-    dispatch(
-      forgotResetPassSlice.actions.forgotPasswordFailed(
-        error.response.data.message
-      )
-    );
+    const errorMessage = error.response?.data?.message || error.message || "Failed to send reset email";
+    dispatch(forgotResetPassSlice.actions.forgotPasswordFailed(errorMessage));
   }
 };
 
-export const resetPassword =
-  (token, password, confirmPassword) => async (dispatch) => {
-    try {
-      dispatch(forgotResetPassSlice.actions.resetPasswordRequest());
-      const response = await axios.put(
-        ` https://mern-stack-portfolio-backend-code.onrender.com/api/v1/user/password/reset/${token}`,
-        { password, confirmPassword },
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      console.log(response);
-      dispatch(
-        forgotResetPassSlice.actions.resetPasswordSuccess(response.data.message)
-      );
-    } catch (error) {
-      console.log(error);
-      dispatch(
-        forgotResetPassSlice.actions.resetPasswordFailed(
-          error.response.data.message
-        )
-      );
-    }
-  };
+export const resetPassword = (token, password, confirmPassword) => async (dispatch) => {
+  dispatch(forgotResetPassSlice.actions.resetPasswordRequest());
+  try {
+    const { data } = await axios.put(
+      ` http://localhost:4000/api/v1/user/password/reset/${token}`,
+      { password, confirmPassword },
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    dispatch(forgotResetPassSlice.actions.resetPasswordSuccess(data.message));
+    dispatch(forgotResetPassSlice.actions.clearAllErrors());
+  } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to reset password";
+    dispatch(forgotResetPassSlice.actions.resetPasswordFailed(errorMessage));
+  }
+};
 
 export const clearAllForgotResetPassErrors = () => (dispatch) => {
   dispatch(forgotResetPassSlice.actions.clearAllErrors());

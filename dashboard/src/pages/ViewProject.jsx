@@ -13,32 +13,35 @@ const ViewProject = () => {
   const [deployed, setDeployed] = useState("");
   const [projectLink, setProjectLink] = useState("");
   const [projectBanner, setProjectBanner] = useState("");
+  const [project, setProject] = useState(null);
 
   const { id } = useParams();
 
   useEffect(() => {
-    const getProject = async () => {
-      await axios
-        .get(`https://mern-stack-portfolio-backend-code.onrender.com/api/v1/project/get/${id}`, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          setTitle(res.data.project.title);
-          setDescription(res.data.project.description);
-          setStack(res.data.project.stack);
-          setDeployed(res.data.project.deployed);
-          setTechnologies(res.data.project.technologies);
-          setGitRepoLink(res.data.project.gitRepoLink);
-          setProjectLink(res.data.project.projectLink);
-          setProjectBanner(
-            res.data.project.projectBanner && res.data.project.projectBanner.url
-          );
-        })
-        .catch((error) => {
-          toast.error(error.response.data.message);
-        });
+    const fetchProject = async () => {
+      try {
+        const response = await axios
+          .get(`http://localhost:4000/api/v1/project/get/${id}`, {
+            withCredentials: true,
+          })
+          .then((res) => res.data);
+        setProject(response.project);
+        setTitle(response.project.title);
+        setDescription(response.project.description);
+        setStack(response.project.stack);
+        setDeployed(response.project.deployed);
+        setTechnologies(response.project.technologies);
+        setGitRepoLink(response.project.gitRepoLink);
+        setProjectLink(response.project.projectLink);
+        setProjectBanner(
+          response.project.projectBanner && response.project.projectBanner.url
+        );
+      } catch (error) {
+        console.error("Error fetching project:", error);
+      }
     };
-    getProject();
+
+    fetchProject();
   }, [id]);
 
   const navigateTo = useNavigate();

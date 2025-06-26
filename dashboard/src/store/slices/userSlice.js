@@ -104,7 +104,6 @@ const userSlice = createSlice({
     },
     clearAllErrors(state, action) {
       state.error = null;
-      state = state.user;
     },
   },
 });
@@ -113,40 +112,43 @@ export const login = (email, password) => async (dispatch) => {
   dispatch(userSlice.actions.loginRequest());
   try {
     const { data } = await axios.post(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/user/login",
+      "http://localhost:4000/api/v1/user/login",
       { email, password },
       { withCredentials: true, headers: { "Content-Type": "application/json" } }
     );
     dispatch(userSlice.actions.loginSuccess(data.user));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.loginFailed(error.response.data.message));
+    const errorMessage = error.response?.data?.message || error.message || "Login failed";
+    dispatch(userSlice.actions.loginFailed(errorMessage));
   }
 };
 
 export const getUser = () => async (dispatch) => {
   dispatch(userSlice.actions.loadUserRequest());
   try {
-    const { data } = await axios.get("https://mern-stack-portfolio-backend-code.onrender.com/api/v1/user/me", {
+    const { data } = await axios.get("http://localhost:4000/api/v1/user/me", {
       withCredentials: true,
     });
     dispatch(userSlice.actions.loadUserSuccess(data.user));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.loadUserFailed(error.response.data.message));
+    const errorMessage = error.response?.data?.message || error.message || "Failed to load user";
+    dispatch(userSlice.actions.loadUserFailed(errorMessage));
   }
 };
 
 export const logout = () => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/user/logout",
+      "http://localhost:4000/api/v1/user/logout",
       { withCredentials: true }
     );
     dispatch(userSlice.actions.logoutSuccess(data.message));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.logoutFailed(error.response.data.message));
+    const errorMessage = error.response?.data?.message || error.message || "Logout failed";
+    dispatch(userSlice.actions.logoutFailed(errorMessage));
   }
 };
 
@@ -155,7 +157,7 @@ export const updatePassword =
     dispatch(userSlice.actions.updatePasswordRequest());
     try {
       const { data } = await axios.put(
-        "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/user/password/update",
+        "http://localhost:4000/api/v1/user/password/update",
         { currentPassword, newPassword, confirmNewPassword },
         {
           withCredentials: true,
@@ -165,8 +167,9 @@ export const updatePassword =
       dispatch(userSlice.actions.updatePasswordSuccess(data.message));
       dispatch(userSlice.actions.clearAllErrors());
     } catch (error) {
+      const errorMessage = error.response?.data?.message || error.message || "Password update failed";
       dispatch(
-        userSlice.actions.updatePasswordFailed(error.response.data.message)
+        userSlice.actions.updatePasswordFailed(errorMessage)
       );
     }
   };
@@ -175,7 +178,7 @@ export const updateProfile = (data) => async (dispatch) => {
   dispatch(userSlice.actions.updateProfileRequest());
   try {
     const response = await axios.put(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/user/me/profile/update",
+      "http://localhost:4000/api/v1/user/me/profile/update",
       data,
       {
         withCredentials: true,
@@ -185,8 +188,9 @@ export const updateProfile = (data) => async (dispatch) => {
     dispatch(userSlice.actions.updateProfileSuccess(response.data.message));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Profile update failed";
     dispatch(
-      userSlice.actions.updateProfileFailed(error.response.data.message)
+      userSlice.actions.updateProfileFailed(errorMessage)
     );
   }
 };

@@ -57,7 +57,7 @@ export const getAllMessages = () => async (dispatch) => {
   dispatch(messageSlice.actions.getAllMessagesRequest());
   try {
     const response = await axios.get(
-      "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/message/getall",
+      "http://localhost:4000/api/v1/message/getall",
       { withCredentials: true }
     );
     dispatch(
@@ -65,8 +65,9 @@ export const getAllMessages = () => async (dispatch) => {
     );
     dispatch(messageSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to load messages";
     dispatch(
-      messageSlice.actions.getAllMessagesFailed(error.response.data.message)
+      messageSlice.actions.getAllMessagesFailed(errorMessage)
     );
   }
 };
@@ -75,7 +76,7 @@ export const deleteMessage = (id) => async (dispatch) => {
   dispatch(messageSlice.actions.deleteMessageRequest());
   try {
     const response = await axios.delete(
-      `https://mern-stack-portfolio-backend-code.onrender.com/api/v1/message/delete/${id}`,
+      `http://localhost:4000/api/v1/message/delete/${id}`,
       {
         withCredentials: true,
       }
@@ -83,8 +84,9 @@ export const deleteMessage = (id) => async (dispatch) => {
     dispatch(messageSlice.actions.deleteMessageSuccess(response.data.message));
     dispatch(messageSlice.actions.clearAllErrors());
   } catch (error) {
+    const errorMessage = error.response?.data?.message || error.message || "Failed to delete message";
     dispatch(
-      messageSlice.actions.deleteMessageFailed(error.response.data.message)
+      messageSlice.actions.deleteMessageFailed(errorMessage)
     );
   }
 };
