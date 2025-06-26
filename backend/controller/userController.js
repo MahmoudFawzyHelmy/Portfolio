@@ -28,7 +28,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
   //POSTING RESUME
   const cloudinaryResponseForResume = await cloudinary.uploader.upload(
     resume.tempFilePath,
-    { folder: "PORTFOLIO RESUME" }
+    { folder: "PORTFOLIO RESUME", resource_type: "raw" }
   );
   if (!cloudinaryResponseForResume || cloudinaryResponseForResume.error) {
     console.error(
@@ -146,10 +146,11 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.user.id);
     const resumeFileId = user.resume.public_id;
     if (resumeFileId) {
-      await cloudinary.uploader.destroy(resumeFileId);
+      await cloudinary.uploader.destroy(resumeFileId, { resource_type: "raw" });
     }
     const newResume = await cloudinary.uploader.upload(resume.tempFilePath, {
       folder: "PORTFOLIO RESUME",
+      resource_type: "raw"
     });
     newUserData.resume = {
       public_id: newResume.public_id,

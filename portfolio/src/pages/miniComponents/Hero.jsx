@@ -15,11 +15,15 @@ const Hero = () => {
   const [user, setUser] = useState({});
   useEffect(() => {
     const getMyProfile = async () => {
-      const { data } = await axios.get(
-        "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/user/portfolio/me",
-        { withCredentials: true }
-      );
-      setUser(data.user);
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/api/v1/user/portfolio/me",
+          { withCredentials: true }
+        );
+        setUser(response.data.user);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
     };
     getMyProfile();
   }, []);
@@ -63,29 +67,37 @@ const Hero = () => {
 
         {/* Social media links with glass morphism */}
         <div className="glass w-fit px-6 py-4 rounded-2xl flex gap-6 items-center mb-8 backdrop-blur-md">
-          <Link to={user.facebookURL} target="_blank" className="hover:scale-110 transition-transform duration-300">
-            <Facebook className="text-blue-600 w-8 h-8 hover:text-blue-500" />
-          </Link>
-          <Link to={user.linkedInURL} target="_blank" className="hover:scale-110 transition-transform duration-300">
-            <Linkedin className="text-sky-500 w-8 h-8 hover:text-sky-400" />
-          </Link>
+          {user.facebookURL && (
+            <a href={user.facebookURL} target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-300">
+              <Facebook className="text-blue-600 w-8 h-8 hover:text-blue-500" />
+            </a>
+          )}
+          {user.linkedInURL && (
+            <a href={user.linkedInURL} target="_blank" rel="noopener noreferrer" className="hover:scale-110 transition-transform duration-300">
+              <Linkedin className="text-sky-500 w-8 h-8 hover:text-sky-400" />
+            </a>
+          )}
         </div>
 
         {/* Action buttons with modern design */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
-          <Link to={user.githubURL} target="_blank">
-            <Button className="modern-button flex items-center gap-3 px-8 py-4 text-lg">
-              <Github className="w-5 h-5" />
-              <span>View GitHub</span>
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
-          <Link to={user.resume && user.resume.url} target="_blank">
-            <Button className="modern-button flex items-center gap-3 px-8 py-4 text-lg" style={{background: 'linear-gradient(45deg, #4ecdc4, #44a08d)'}}>
-              <Download className="w-5 h-5" />
-              <span>Download CV</span>
-            </Button>
-          </Link>
+          {user.githubURL && (
+            <a href={user.githubURL} target="_blank" rel="noopener noreferrer">
+              <Button className="modern-button flex items-center gap-3 px-8 py-4 text-lg">
+                <Github className="w-5 h-5" />
+                <span>View GitHub</span>
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </a>
+          )}
+          {user.resume && user.resume.url && (
+            <a href={user.resume.url} download target="_blank" rel="noopener noreferrer">
+              <Button className="modern-button flex items-center gap-3 px-8 py-4 text-lg" style={{background: 'linear-gradient(45deg, #4ecdc4, #44a08d)'}}>
+                <Download className="w-5 h-5" />
+                <span>Download CV</span>
+              </Button>
+            </a>
+          )}
         </div>
 
         {/* About me section with enhanced styling */}

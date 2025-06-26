@@ -10,11 +10,11 @@ const Skills = () => {
   useEffect(() => {
     const getMySkills = async () => {
       try {
-        const { data } = await axios.get(
-          "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/skill/getall",
+        const response = await axios.get(
+          "http://localhost:4000/api/v1/skill/getall",
           { withCredentials: true }
         );
-        setSkills(data.skills);
+        setSkills(response.data.skills);
       } catch (error) {
         console.error("Error fetching skills:", error);
       } finally {

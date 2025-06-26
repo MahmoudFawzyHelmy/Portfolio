@@ -130,19 +130,24 @@ const UpdateProfile = () => {
                 </div>
                 <div className="grid gap-2 w-full sm:w-72">
                   <Label>Resume</Label>
-                  <Link
-                    to={user && user.resume && user.resume.url}
-                    target="_blank"
-                  >
-                    <img
-                      src={resumePreview ? resumePreview : "/avatarHolder.jpg"}
-                      alt="avatar"
-                      className="w-full  h-auto sm:w-72 sm:h-72 rounded-2xl"
-                    />
-                  </Link>
+                  {resumePreview && (resumePreview.endsWith('.pdf') || resumePreview.endsWith('.doc') || resumePreview.endsWith('.docx')) ? (
+                    <a href={resumePreview} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline flex items-center gap-2">
+                      <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                      {resumePreview.split('/').pop()}
+                    </a>
+                  ) : (
+                    <Link to={user && user.resume && user.resume.url} target="_blank">
+                      <img
+                        src={resumePreview ? resumePreview : "/avatarHolder.jpg"}
+                        alt="resume"
+                        className="w-full h-auto sm:w-72 sm:h-72 rounded-2xl"
+                      />
+                    </Link>
+                  )}
                   <div className="relative">
                     <input
                       type="file"
+                      accept=".pdf,.doc,.docx"
                       onChange={resumeHandler}
                       className="avatar-update-btn"
                     />

@@ -9,11 +9,11 @@ const Timeline = () => {
   useEffect(() => {
     const getMyTimeline = async () => {
       try {
-        const { data } = await axios.get(
-          "https://mern-stack-portfolio-backend-code.onrender.com/api/v1/timeline/getall",
+        const response = await axios.get(
+          "http://localhost:4000/api/v1/timeline/getall",
           { withCredentials: true }
         );
-        setTimeline(data.timelines);
+        setTimeline(response.data.timelines);
       } catch (error) {
         console.error("Error fetching timeline:", error);
         // Default timeline if API fails
