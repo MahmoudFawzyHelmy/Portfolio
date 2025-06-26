@@ -49,13 +49,13 @@ const Login = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">تسجيل الدخول</h1>
-            <p className="text-slate-600 dark:text-slate-300">ادخل بريدك الإلكتروني وكلمة المرور للمتابعة</p>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">Login</h1>
+            <p className="text-slate-600 dark:text-slate-300">Enter your email and password to continue</p>
           </div>
           
           <div className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-200">البريد الإلكتروني</Label>
+              <Label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-200">Email</Label>
               <div className="relative">
                 <Input
                   id="email"
@@ -76,8 +76,8 @@ const Login = () => {
             
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-200">كلمة المرور</Label>
-                <Link to="/password/forgot" className="text-sm text-blue-600 hover:text-blue-500 transition-colors">نسيت كلمة المرور؟</Link>
+                <Label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-200">Password</Label>
+                <Link to="/password/forgot" className="text-sm text-blue-600 hover:text-blue-500 transition-colors">Forgot password?</Link>
               </div>
               <div className="relative">
                 <Input
@@ -97,13 +97,13 @@ const Login = () => {
             </div>
             
             {loading ? (
-              <SpecialLoadingButton content={"جاري تسجيل الدخول..."} />
+              <SpecialLoadingButton content={"Logging in..."} />
             ) : (
               <Button
                 onClick={handleLogin}
                 className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
-                دخول
+                Login
               </Button>
             )}
           </div>
