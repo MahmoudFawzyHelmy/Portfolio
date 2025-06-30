@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Heart, ArrowUp, Mail, Github, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 
