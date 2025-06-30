@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <footer className="w-full relative mt-20">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-800 to-transparent"></div>
-      
+
       <div className="relative z-10">
         {/* Main footer content */}
         <div className="max-w-[1050px] mx-auto px-5">
@@ -27,13 +27,22 @@ const Footer = () => {
             <div className="space-y-4">
               <h2 className="text-gradient text-2xl font-bold">Mahmoud</h2>
               <p className="text-gray-400 leading-relaxed">
-                Full-stack developer passionate about creating innovative web solutions and sharing knowledge through content creation.
+                Full-stack developer passionate about creating innovative web
+                solutions and sharing knowledge through content creation.
               </p>
               <div className="flex gap-4">
-                <Link to="https://github.com" target="_blank" className="p-2 bg-gray-800 rounded-full hover:bg-purple-600 transition-colors">
+                <Link
+                  to="https://github.com"
+                  target="_blank"
+                  className="p-2 bg-gray-800 rounded-full hover:bg-purple-600 transition-colors"
+                >
                   <Github className="w-5 h-5 text-white" />
                 </Link>
-                <Link to="https://linkedin.com" target="_blank" className="p-2 bg-gray-800 rounded-full hover:bg-purple-600 transition-colors">
+                <Link
+                  to="https://linkedin.com"
+                  target="_blank"
+                  className="p-2 bg-gray-800 rounded-full hover:bg-purple-600 transition-colors"
+                >
                   <Linkedin className="w-5 h-5 text-white" />
                 </Link>
               </div>
@@ -43,11 +52,36 @@ const Footer = () => {
             <div className="space-y-4">
               <h3 className="text-white font-semibold text-lg">Quick Links</h3>
               <div className="space-y-2">
-                <Link to="/" className="block text-gray-400 hover:text-purple-400 transition-colors">Home</Link>
-                <Link to="#about" className="block text-gray-400 hover:text-purple-400 transition-colors">About</Link>
-                <Link to="#skills" className="block text-gray-400 hover:text-purple-400 transition-colors">Skills</Link>
-                <Link to="#portfolio" className="block text-gray-400 hover:text-purple-400 transition-colors">Portfolio</Link>
-                <Link to="#contact" className="block text-gray-400 hover:text-purple-400 transition-colors">Contact</Link>
+                <Link
+                  to="/"
+                  className="block text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  Home
+                </Link>
+                <Link
+                  to="#about"
+                  className="block text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  About
+                </Link>
+                <Link
+                  to="#skills"
+                  className="block text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  Skills
+                </Link>
+                <Link
+                  to="#portfolio"
+                  className="block text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  Portfolio
+                </Link>
+                <Link
+                  to="#contact"
+                  className="block text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  Contact
+                </Link>
               </div>
             </div>
 
@@ -57,15 +91,21 @@ const Footer = () => {
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-purple-400" />
-                  <span className="text-gray-400">Mahmoud@example.com</span>
+                  <span className="text-gray-400">
+                    MahmoudFawzy.Helmy@gmail.com
+                  </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Github className="w-5 h-5 text-purple-400" />
-                  <span className="text-gray-400">github.com/Mahmoud</span>
+                  <span className="text-gray-400">
+                    github.com/MahmoudFawzyHelmy
+                  </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Linkedin className="w-5 h-5 text-purple-400" />
-                  <span className="text-gray-400">linkedin.com/in/Mahmoud</span>
+                  <span className="text-gray-400">
+                    Linkedin.com/in/mahmoud-fawzy-helmy/
+                  </span>
                 </div>
               </div>
             </div>
@@ -79,9 +119,9 @@ const Footer = () => {
                 <Heart className="w-4 h-4 text-red-500 fill-red-500" />
                 <span>by Mahmoud</span>
               </div>
-              
+
               <div className="flex items-center gap-4">
-                <span className="text-gray-400">© 2024 All rights reserved</span>
+                <span className="text-gray-400">©2025 All rights reserved</span>
                 <button
                   onClick={scrollToTop}
                   className="p-2 bg-purple-600 rounded-full hover:bg-purple-700 transition-colors"
